@@ -1,0 +1,29 @@
+{
+  "manifest_version":2,
+  "name":"buttomSilent",
+  "version":"1.0.0",
+  "description":"buttomSilent demo",
+  "icons":{
+    "16":"img/clover48.png",
+    "48":"img/clover48.png",
+    "128":"img/clover48.png"
+  },
+  "browser_action":{
+    "default_icon":"img/clover48.png",
+    "default_title":"ButtomSilent",
+    "default_popup":"templates/pop.html"
+  },
+  "content_scripts":
+  [
+    {
+      "matches": ["*://*.bilibili.com/*"],
+      "js": ["scripts/jquery-1.11.1.min.js","scripts/content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": ["scripts/jquery-1.11.1.min.js","scripts/injected-script.js"],
+  "permissions":["contextMenus","tabs","notifications","http://*/*","https://*/*","*://*.bilibili.com/*"],
+  "background":{
+    "page":"background.html"
+  }
+}
