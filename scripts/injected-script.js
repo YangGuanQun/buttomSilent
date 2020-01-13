@@ -21,8 +21,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     sendResponse('我收到了你的消息！');
 });*/
 
+
     var itv = setInterval(function(){
-        debugger
+        //debugger
 		
 		var btn = $('.bilibili-player-video-danmaku-setting');
 
