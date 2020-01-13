@@ -22,40 +22,45 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });*/
 
     var itv = setInterval(function(){
-        //debugger
-        console.log(document.getElementsByName('ctlbar_danmuku_close')[0]);
-        console.log($(document.getElementsByName('ctlbar_danmuku_close')[0]).data('events'));
-        if($(document.getElementsByName('ctlbar_danmuku_close')[0]).data('events')){
+        debugger
+		
+		var btn = $('.bilibili-player-video-danmaku-setting');
+
+        if(btn.data('events')){
             clearInterval(itv);
-            $(document.getElementsByName('ctlbar_danmuku_close')[0]).trigger('mouseover');
+            btn.trigger('mouseover');
             var topFlag,bottomFlag;
             var itv1 = setInterval(function(){
-                if (document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmutop').length > 0){
-                    if (document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmutop')[0].parentNode.getAttribute('class').indexOf('disabled') < 0){
-                        document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmutop')[0].click();
-                    }
-                    clearInterval(itv1);
-                    topFlag = true;
-                    closePanel();
+                if ($('.bilibili-player-block-filter-label').length == 5){
+					for (var i = 0; i< $('.bilibili-player-block-filter-label').length;i++) {
+						if ($('.bilibili-player-block-filter-label')[i].innerText == '顶部' && $($('.bilibili-player-block-filter-label')[i]).parent().attr('class').indexOf('disable') == -1) {
+							$('.bilibili-player-block-filter-label')[i].click();
+							topFlag = true;
+							closePanel();
+							clearInterval(itv1);
+						}
+					}
                 }
             },500);
             var itv2 = setInterval(function(){
-                if (document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmubottom').length > 0){
-                    if (document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmubottom')[0].parentNode.getAttribute('class').indexOf('disabled') < 0){
-                        document.getElementsByClassName('bilibili-player-block-filter-image bilibili-player-iconfont icon-48danmubottom')[0].click();
-                    }
-                    clearInterval(itv2);
-                    bottomFlag = true;
-                    closePanel();
+                if ($('.bilibili-player-block-filter-label').length == 5){
+					for (var i = 0; i< $('.bilibili-player-block-filter-label').length;i++) {
+						if ($('.bilibili-player-block-filter-label')[i].innerText == '底部' && $($('.bilibili-player-block-filter-label')[i]).parent().attr('class').indexOf('disable') == -1) {
+							$('.bilibili-player-block-filter-label')[i].click();
+							topFlag = true;
+							closePanel();
+							clearInterval(itv2);
+						}
+					}
                 }
             },500);
             var closePanel = function(){
                 if (topFlag && bottomFlag){
-                    $('[name="ctlbar_danmuku_close"]').trigger('mouseout');
+                    btn.trigger('mouseout');
                 }
             }
             setTimeout(function(){
-                $('[name="ctlbar_danmuku_close"]').trigger('mouseout');
+                btn.trigger('mouseout');
             },1000);
         }
     },100);
